@@ -27,24 +27,40 @@ import com.halvors.LocalChat.LocalChat;
 public class GroupManager {
 //    private final LocalChat plugin;
     
-    private List<Group> groups = new ArrayList<Group>();
+    private final List<Group> groups;
     
     public GroupManager(final LocalChat plugin) {
 //        this.plugin = plugin;
+    	this.groups = new ArrayList<Group>();
     }
     
-    public List<Group> getGroups() {
-        return groups;
+    public void addGroup(Group group) {
+    	if (groups.contains(group)) {
+    		groups.remove(group);
+    	}
+    	
+        groups.add(group);
+    }
+
+    public void removeGroup(Group group) {
+    	if (groups.contains(group)) {
+    		groups.remove(group);
+    	}
     }
     
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public boolean hasGroup(String group) {
+    	for (Group g : groups) {
+            if (getGroup(group) != null) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     public Group getGroup(String name) {
-        for (int i = 0; i < groups.size(); i++) {
-            Group g = groups.get(i);
-            
+    	for (Group g : groups) {
+
             if (g.getName().equalsIgnoreCase(name)) {
                 return g;
             }
@@ -53,30 +69,12 @@ public class GroupManager {
         return null;
     }
     
-    public void addGroup(Group group) {
-        groups.add(group);
-    }
-
-    public void removeGroup(Group group) {
-        groups.remove(group);
-    }
-    
-    public boolean hasGroup(String group) {
-        for (int i = 0; i < groups.size(); i++) {
-            String name = groups.get(i).getName();
-            
-            if (name.equalsIgnoreCase(group)) {
-                return true;
-            }
-        }
-        
-        return false;
+    public List<Group> getGroups() {
+    	return groups;
     }
     
     public Group getDefaultGroup() {
-        for (int i = 0; i < groups.size(); i++) {
-            Group g = groups.get(i);
-            
+        for (Group g : groups) {
             if (g.getDefault()) {
                 return g;
             }
