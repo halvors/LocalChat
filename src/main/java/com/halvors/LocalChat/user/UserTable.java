@@ -34,11 +34,48 @@ public class UserTable {
     @Id
     private int id;
     
+    private String name;
+    private String group;
+    private boolean isMuted;
+    private boolean isSpying;
+    
     public int getId() {
         return id;
     }
     
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getName() {
+    	return name;
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public String getGroup() {
+    	return group;
+    }
+    
+    public void setGroup(String group) {
+    	this.group = group;
+    }
+    
+    public boolean isMuted() {
+    	return isMuted;
+    }
+    
+    public void setSpying(boolean isMuted) {
+    	this.isMuted = isMuted;
+    }
+    
+    public boolean isSpying() {
+    	return isSpying;
+    }
+    
+    public void isSpying(boolean isSpying) {
+    	this.isSpying = isSpying;
     }
 }

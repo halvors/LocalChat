@@ -27,37 +27,42 @@ import com.halvors.LocalChat.LocalChat;
 public class UserManager {
 //    private final LocalChat plugin;
     
-    private List<User> users = new ArrayList<User>();
+    private final List<User> users;
     
     public UserManager(final LocalChat plugin) {
 //        this.plugin = plugin;
+    	this.users = new ArrayList<User>();
     }
     
-    public List<User> getUsers() {
-        return users;
+    public void addUser(User user) {
+    	if (users.contains(user)) {
+    		users.remove(user);
+    	}
+    	
+        users.add(user);
+    }
+
+    public void removeUser(User user) {
+    	if (users.contains(user)) {
+    		users.remove(user);
+    	}
     }
     
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public boolean hasUser(String name) {
+    	if (getUser(name) != null) {
+    		return true;
+    	}
+    	
+    	return false;
     }
     
     public User getUser(String name) {
-        for (int i = 0; i < users.size(); i++) {
-            User u = users.get(i);
-            
+        for (User u : users) {
             if (u.getName().equalsIgnoreCase(name)) {
                 return u;
             }
         }
         
         return null;
-    }
-    
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    public void removeUser(User user) {
-        users.remove(user);
     }
 }
