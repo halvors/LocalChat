@@ -1,0 +1,10 @@
+name: LocalChat
+main: com.halvors.LocalChat.LocalChat
+version: 0.1
+author: halvors
+database: true
+
+commands:
+    lc:
+        description:
+        usage:
