@@ -23,65 +23,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.halvors.LocalChat.LocalChat;
-	
+    
 public class GroupManager {
-//	private final LocalChat plugin;
-	
-	private List<Group> groups = new ArrayList<Group>();
-	
-	public GroupManager(final LocalChat plugin) {
-//		this.plugin = plugin;
-	}
-	
-	public List<Group> getGroups() {
-		return groups;
-	}
-	
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
-	}
-	
-	public Group getGroup(String name) {
-		for (int i = 0; i < groups.size(); i++) {
-			Group g = groups.get(i);
-			
-			if (g.getName().equalsIgnoreCase(name)) {
-				return g;
-			}
-		}
-		
-		return null;
-	}
-	
-	public void addGroup(Group group) {
+//    private final LocalChat plugin;
+    
+    private List<Group> groups = new ArrayList<Group>();
+    
+    public GroupManager(final LocalChat plugin) {
+//        this.plugin = plugin;
+    }
+    
+    public List<Group> getGroups() {
+        return groups;
+    }
+    
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+    
+    public Group getGroup(String name) {
+        for (int i = 0; i < groups.size(); i++) {
+            Group g = groups.get(i);
+            
+            if (g.getName().equalsIgnoreCase(name)) {
+                return g;
+            }
+        }
+        
+        return null;
+    }
+    
+    public void addGroup(Group group) {
         groups.add(group);
     }
 
-	public void removeGroup(Group group) {
-		groups.remove(group);
-	}
-	
-	public boolean hasGroup(String group) {
-		for (int i = 0; i < groups.size(); i++) {
-			String name = groups.get(i).getName();
-			
-			if (name.equalsIgnoreCase(group)) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	public Group getDefaultGroup() {
-		for (int i = 0; i < groups.size(); i++) {
-			Group g = groups.get(i);
-			
-			if (g.getDefault()) {
-				return g;
-			}
-		}
-		
-		return null;
-	}
+    public void removeGroup(Group group) {
+        groups.remove(group);
+    }
+    
+    public boolean hasGroup(String group) {
+        for (int i = 0; i < groups.size(); i++) {
+            String name = groups.get(i).getName();
+            
+            if (name.equalsIgnoreCase(group)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public Group getDefaultGroup() {
+        for (int i = 0; i < groups.size(); i++) {
+            Group g = groups.get(i);
+            
+            if (g.getDefault()) {
+                return g;
+            }
+        }
+        
+        return null;
+    }
 }

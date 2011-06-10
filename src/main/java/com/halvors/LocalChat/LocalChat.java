@@ -37,6 +37,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.halvors.LocalChat.group.GroupManager;
 import com.halvors.LocalChat.group.GroupTable;
 import com.halvors.LocalChat.user.UserManager;
+import com.halvors.LocalChat.user.UserTable;
 import com.halvors.LocalChat.util.ConfigManager;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
@@ -74,6 +75,8 @@ public class LocalChat extends JavaPlugin {
         
         // Register our events Type.          
         pm.registerEvent(Event.Type.PLAYER_CHAT, playerListener, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Normal, this);
         
         // Register our commands
         this.getCommand("lc").setExecutor(new LocalChatCommandExecutor(this));
@@ -106,6 +109,7 @@ public class LocalChat extends JavaPlugin {
     private void setupDatabase() {
         try {
             this.getDatabase().find(GroupTable.class).findRowCount();
+            this.getDatabase().find(UserTable.class).findRowCount();
         } catch (PersistenceException ex) {
             log(Level.INFO, "Installing database for " + getDescription().getName() + " due to first time usage");
             installDDL();
@@ -116,6 +120,7 @@ public class LocalChat extends JavaPlugin {
     public List<Class<?>> getDatabaseClasses() {
         List<Class<?>> list = new ArrayList<Class<?>>();
         list.add(GroupTable.class);
+        list.add(UserTable.class);
         
         return list;
     }
@@ -145,34 +150,34 @@ public class LocalChat extends JavaPlugin {
     }
     
     public String getName() {
-    	return name;
+        return name;
     }
     
     public String getVersion() {
-    	return version;
+        return version;
     }
     
     public ConfigManager getConfigManager() {
         return configManager;
     }
     public GroupManager getGroupManager() {
-    	return groupManager;
+        return groupManager;
     }
 
     public UserManager getUserManager() {
-    	return userManager;
+        return userManager;
     }
 }
 
 //
 //public class LocalChat extends JavaPlugin {
-//	private String name;
-//	private String version;
-//	
-//	private final Logger log = Logger.getLogger("Minecraft");
-//	
-//	private PluginManager pm;
-//	private PluginDescriptionFile pdfFile;
+//    private String name;
+//    private String version;
+//    
+//    private final Logger log = Logger.getLogger("Minecraft");
+//    
+//    private PluginManager pm;
+//    private PluginDescriptionFile pdfFile;
 //    
 //    private final ConfigManager configManager = new ConfigManager(this);
 //    private final GroupManager groupManager = new GroupManager(this);
@@ -185,8 +190,8 @@ public class LocalChat extends JavaPlugin {
 //    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 //    
 //    public void onEnable() {
-//    	pm = getServer().getPluginManager();
-//    	pdfFile = this.getDescription();
+//        pm = getServer().getPluginManager();
+//        pdfFile = this.getDescription();
 //        
 //        // Load name and version from pdfFile
 //        name = pdfFile.getName();
@@ -204,7 +209,7 @@ public class LocalChat extends JavaPlugin {
 //        }
 //
 //        for (Player player : this.getServer().getOnlinePlayers()) {
-//        	configManager.loadPlayer(player.getName());
+//            configManager.loadPlayer(player.getName());
 //        }
 //        
 //        try {
@@ -230,9 +235,9 @@ public class LocalChat extends JavaPlugin {
 //    }
 //    
 //    public void onDisable() {
-//    	try {
+//        try {
 //            for (Player player : this.getServer().getOnlinePlayers()) {
-//            	configManager.savePlayer(player.getName());
+//                configManager.savePlayer(player.getName());
 //            }
 //            
 //            configManager.save();
@@ -242,18 +247,18 @@ public class LocalChat extends JavaPlugin {
 //            this.getServer().getPluginManager().disablePlugin(this);
 //            return;
 //        }
-//    	
+//        
 //        log(Level.INFO, "Plugin disabled!");
 //    }
 //    
 //    private void setupPermissions() {
-//    	Plugin permissions = this.getServer().getPluginManager().getPlugin("Permissions");
+//        Plugin permissions = this.getServer().getPluginManager().getPlugin("Permissions");
 //
 //        if (Permissions == null) {
-//        	if (permissions != null) {
-//            	Permissions = ((Permissions)permissions).getHandler();
+//            if (permissions != null) {
+//                Permissions = ((Permissions)permissions).getHandler();
 //            } else {
-//            	log(Level.INFO, "Permission system not detected, defaulting to OP");
+//                log(Level.INFO, "Permission system not detected, defaulting to OP");
 //            }
 //        }
 //    }
@@ -283,14 +288,14 @@ public class LocalChat extends JavaPlugin {
 //    }
 //    
 //    public ConfigManager getConfigManager() {
-//    	return configManager;
+//        return configManager;
 //    }
 //    
 //    public GroupManager getGroupManager() {
-//    	return groupManager;
+//        return groupManager;
 //    }
 //    
 //    public UserManager getUserManager() {
-//    	return userManager;
+//        return userManager;
 //    }
 //}

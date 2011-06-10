@@ -27,73 +27,73 @@ import org.bukkit.ChatColor;
 import com.halvors.LocalChat.LocalChat;
 
 public class Group {
-	private final LocalChat plugin;
-	
-	private String name;
-	private boolean isDefault;
-	private String description;
-	private int distance;
-	
-	private List<String> players;
-	private List<String> worlds;
-	
-	public Group(final LocalChat plugin) {
-		this.plugin = plugin;
-		
-		players = new ArrayList<String>();
-		worlds = new ArrayList<String>();
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public boolean getDefault() {
-		return isDefault;
-	}
-	
-	public void setDefault(boolean d) {
-		this.isDefault = d;
-	}
-	
-	public int getDistance() {
-		return distance;
-	}
-	
-	public void setDistance(int distance) {
-		this.distance = distance;
-	}
-	
-	public List<String> getPlayers() {
-		return players;
-	}
-	
-	public void setPlayers(List<String> players) {
-		this.players = players;
-	}
-	
+    private final LocalChat plugin;
+    
+    private String name;
+    private boolean isDefault;
+    private String description;
+    private int distance;
+    
+    private List<String> players;
+    private List<String> worlds;
+    
+    public Group(final LocalChat plugin) {
+        this.plugin = plugin;
+        
+        players = new ArrayList<String>();
+        worlds = new ArrayList<String>();
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public boolean getDefault() {
+        return isDefault;
+    }
+    
+    public void setDefault(boolean d) {
+        this.isDefault = d;
+    }
+    
+    public int getDistance() {
+        return distance;
+    }
+    
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+    
+    public List<String> getPlayers() {
+        return players;
+    }
+    
+    public void setPlayers(List<String> players) {
+        this.players = players;
+    }
+    
     public void addPlayer(String name) {
         if (!players.contains(name)) {
             players.add(name);
             
             for (int i = 0; i < players.size(); i++) {
-            	String player = players.get(i);
-            	
-            	if (!name.equalsIgnoreCase(player)) {
-            		plugin.getServer().broadcastMessage(ChatColor.GREEN + player + " joined the group!");
-            	}
+                String player = players.get(i);
+                
+                if (!name.equalsIgnoreCase(player)) {
+                    plugin.getServer().broadcastMessage(ChatColor.GREEN + player + " joined the group!");
+                }
             }
         }
     }
@@ -103,26 +103,26 @@ public class Group {
             players.remove(name);
             
             for (int i = 0; i < players.size(); i++) {
-            	String player = players.get(i);
-            	
-            	if (!name.equalsIgnoreCase(player)) {
-            		plugin.getServer().broadcastMessage(ChatColor.GREEN + player + " has left the group!");
-            	}
+                String player = players.get(i);
+                
+                if (!name.equalsIgnoreCase(player)) {
+                    plugin.getServer().broadcastMessage(ChatColor.GREEN + player + " has left the group!");
+                }
             }
         }
     }
     
-	public List<String> getWorlds() {
-		return worlds;
-	}
-	
-	public void setWorlds(List<String> worlds) {
-		this.worlds = worlds;
-	}
-	
+    public List<String> getWorlds() {
+        return worlds;
+    }
+    
+    public void setWorlds(List<String> worlds) {
+        this.worlds = worlds;
+    }
+    
     public void addWorld(String name) {
         if (!worlds.contains(name)) {
-        	worlds.add(name);
+            worlds.add(name);
         }
     }
 

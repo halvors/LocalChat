@@ -35,18 +35,18 @@ import com.halvors.LocalChat.user.User;
 import com.halvors.LocalChat.user.UserManager;
 
 public class ConfigManager {
-	private final LocalChat plugin;
-	
-	private UserManager userManager;
-	private GroupManager groupManager;
-	
-	private File configFile;
-//	private File groupsConfigFile;
-	private File usersConfigFolder;
+    private final LocalChat plugin;
     
- 	// Messages
-	
-	// Join
+    private UserManager userManager;
+    private GroupManager groupManager;
+    
+    private File configFile;
+//    private File groupsConfigFile;
+    private File usersConfigFolder;
+    
+     // Messages
+    
+    // Join
     public String You_are_now_in_group;
     public String You_are_no_longer_in_a_group;
     
@@ -79,22 +79,22 @@ public class ConfigManager {
     
     // Reload
     public String Reload_complete;
-	
-	public ConfigManager(final LocalChat plugin) {
-		this.plugin = plugin;
-		
-		groupManager = plugin.getGroupManager();
-		
-	    configFile = new File(plugin.getDataFolder(), "config.yml");
-//	    groupsConfigFile = new File(plugin.getDataFolder(), "groups.yml");
-	    
-	    usersConfigFolder = new File(plugin.getDataFolder(), "users/");
-	}
-	
-	// Load configuration
-	public void load() {
-		checkConfig(configFile, "config.yml");
-		
+    
+    public ConfigManager(final LocalChat plugin) {
+        this.plugin = plugin;
+        
+        groupManager = plugin.getGroupManager();
+        
+        configFile = new File(plugin.getDataFolder(), "config.yml");
+//        groupsConfigFile = new File(plugin.getDataFolder(), "groups.yml");
+        
+        usersConfigFolder = new File(plugin.getDataFolder(), "users/");
+    }
+    
+    // Load configuration
+    public void load() {
+        checkConfig(configFile, "config.yml");
+        
         Configuration config = new Configuration(configFile);
         config.load();
         
@@ -102,22 +102,22 @@ public class ConfigManager {
         loadGroups(config);
     }
 
-	// Save configuration
-	public void save() {
-		Configuration config = new Configuration(configFile);
-		
-		saveGlobals(config);
-		saveGroups(config);
-		
-		config.save();
-	}
-	
-	// Reload configuration
-	public void reload() {
+    // Save configuration
+    public void save() {
+        Configuration config = new Configuration(configFile);
+        
+        saveGlobals(config);
+        saveGroups(config);
+        
+        config.save();
+    }
+    
+    // Reload configuration
+    public void reload() {
         load();
     }
-	
-	private void checkConfig(File config, String defaultName) {
+    
+    private void checkConfig(File config, String defaultName) {
         if (!config.exists()) {
             try {
                 config.getParentFile().mkdir();
@@ -139,83 +139,83 @@ public class ConfigManager {
             }
         }
     }
-	
-	private void loadGlobals(Configuration config) {
+    
+    private void loadGlobals(Configuration config) {
         // Messages
-		
+        
         // Join
-		You_are_now_in_group = config.getString("Messages.You_are_now_in_group", You_are_now_in_group);
-		You_are_no_longer_in_a_group = config.getString("You_are_no_longer_in_a_group", You_are_no_longer_in_a_group);
-		
-		// Status
-		Your_current_group_is = config.getString("Messages.Your_current_group_is", Your_current_group_is);
-		You_are_not_in_a_group = config.getString("Messages.You_are_not_in_a_group", You_are_not_in_a_group);
-		
-		// Player status
-		Player_current_group_is = config.getString("Messages.Player_current_group_is", Player_current_group_is);
-		Player_is_not_in_a_group = config.getString("Messages.Player_is_not_in_a_group", Player_is_not_in_a_group);
-		
-		// Spying
-		You_are_now_spying = config.getString("Messages.You_are_now_spying", You_are_now_spying);
-		You_are_no_longer_spying = config.getString("Messages.You_are_no_longer_spying", You_are_no_longer_spying);
-		
-		// Set
-		Player_group_set_to = config.getString("Messages.Player_group_set_to", Player_group_set_to);
-		
-		// Does not exist messages
-		Player_does_not_exist = config.getString("Messages.Player_does_not_exist", Player_does_not_exist);
-		Group_does_not_exist = config.getString("Messages.Group_does_not_exist", Group_does_not_exist);
-		World_does_not_exist = config.getString("Messages.World_does_not_exist", World_does_not_exist);
-		
-		// Create
-		Group_succesfully_created = config.getString("Messages.Group_succesfully_created", Group_succesfully_created);
-		Group_already_exists = config.getString("Messages.Group_already_exists", Group_already_exists);
-		
-		// Muted
-		You_are_muted = config.getString("Messages.You_are_muted", You_are_muted);
-		
-		// Reload
-		Reload_complete = config.getString("Messages.Reload_complete", Reload_complete);
-	}
-	
-	private void loadGroups(Configuration config) {
-		List<String> keyList = config.getKeys("Groups");
-		List<Group> groups = new ArrayList<Group>();
-		
-		try {
-			for (int i = 0; i < keyList.size(); i++) {
-				String key = keyList.get(i);
-				String root = "Groups." + key + ".";
-			
-				Group g = new Group(plugin);
-				g.setName(keyList.get(i));
-				g.setDefault(config.getBoolean(root + "Default", false));
-				g.setDistance(config.getInt(root + "Distance", 0));
-//				g.setPlayers(config.getStringList(root + "Players", null));
-//				g.setWorlds(config.getStringList(root + "Worlds", null));
+        You_are_now_in_group = config.getString("Messages.You_are_now_in_group", You_are_now_in_group);
+        You_are_no_longer_in_a_group = config.getString("You_are_no_longer_in_a_group", You_are_no_longer_in_a_group);
+        
+        // Status
+        Your_current_group_is = config.getString("Messages.Your_current_group_is", Your_current_group_is);
+        You_are_not_in_a_group = config.getString("Messages.You_are_not_in_a_group", You_are_not_in_a_group);
+        
+        // Player status
+        Player_current_group_is = config.getString("Messages.Player_current_group_is", Player_current_group_is);
+        Player_is_not_in_a_group = config.getString("Messages.Player_is_not_in_a_group", Player_is_not_in_a_group);
+        
+        // Spying
+        You_are_now_spying = config.getString("Messages.You_are_now_spying", You_are_now_spying);
+        You_are_no_longer_spying = config.getString("Messages.You_are_no_longer_spying", You_are_no_longer_spying);
+        
+        // Set
+        Player_group_set_to = config.getString("Messages.Player_group_set_to", Player_group_set_to);
+        
+        // Does not exist messages
+        Player_does_not_exist = config.getString("Messages.Player_does_not_exist", Player_does_not_exist);
+        Group_does_not_exist = config.getString("Messages.Group_does_not_exist", Group_does_not_exist);
+        World_does_not_exist = config.getString("Messages.World_does_not_exist", World_does_not_exist);
+        
+        // Create
+        Group_succesfully_created = config.getString("Messages.Group_succesfully_created", Group_succesfully_created);
+        Group_already_exists = config.getString("Messages.Group_already_exists", Group_already_exists);
+        
+        // Muted
+        You_are_muted = config.getString("Messages.You_are_muted", You_are_muted);
+        
+        // Reload
+        Reload_complete = config.getString("Messages.Reload_complete", Reload_complete);
+    }
+    
+    private void loadGroups(Configuration config) {
+        List<String> keyList = config.getKeys("Groups");
+        List<Group> groups = new ArrayList<Group>();
+        
+        try {
+            for (int i = 0; i < keyList.size(); i++) {
+                String key = keyList.get(i);
+                String root = "Groups." + key + ".";
+            
+                Group g = new Group(plugin);
+                g.setName(keyList.get(i));
+                g.setDefault(config.getBoolean(root + "Default", false));
+                g.setDistance(config.getInt(root + "Distance", 0));
+//                g.setPlayers(config.getStringList(root + "Players", null));
+//                g.setWorlds(config.getStringList(root + "Worlds", null));
 
-				groups.add(g);
-			}
-			
-			groupManager.setGroups(groups);
-		} catch (Exception e) {
-		}
-	}
-	
-	public void loadPlayer(String name) {
+                groups.add(g);
+            }
+            
+            groupManager.setGroups(groups);
+        } catch (Exception e) {
+        }
+    }
+    
+    public void loadPlayer(String name) {
         File userConfigFile = new File(usersConfigFolder, name + ".yml");
         
         try {
-        	Configuration config = new Configuration(userConfigFile);
-        	config.load();
-        	
-        	User u = new User(plugin);
-        	u.setName(name);
-        	u.setGroup(groupManager.getGroup(config.getString("Group", groupManager.getDefaultGroup().getName())));
-        	u.setMuted(config.getBoolean("Muted", false));
-        	u.setSpying(config.getBoolean("Spying", false));
+            Configuration config = new Configuration(userConfigFile);
+            config.load();
             
-        	userManager.addUser(u);
+            User u = new User(plugin);
+            u.setName(name);
+            u.setGroup(groupManager.getGroup(config.getString("Group", groupManager.getDefaultGroup().getName())));
+            u.setMuted(config.getBoolean("Muted", false));
+            u.setSpying(config.getBoolean("Spying", false));
+            
+            userManager.addUser(u);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -223,8 +223,8 @@ public class ConfigManager {
 
     private void saveGlobals(Configuration config) {
         // Messages
-    	
-    	// Join
+        
+        // Join
         config.setProperty("Messages.You_are_now_in_group", You_are_now_in_group);
         config.setProperty("Messages.You_are_no_longer_in_a_group", You_are_no_longer_in_a_group);
         
@@ -262,33 +262,33 @@ public class ConfigManager {
     }
     
     private void saveGroups(Configuration config) {
-    	List<Group> groups = plugin.getGroupManager().getGroups();
-    	
-    	for (int i = 0; i < groups.size(); i++) {
-    		Group g = groups.get(i);
-    		String root = "Groups." + g.getName() + ".";
-    		
-    		config.setProperty(root + "Default", g.getDefault());
-    		config.setProperty(root + "Distance", g.getDistance());
-//    		config.setProperty(root + "Players", g.getPlayers());
-//    		config.setProperty(root + "Worlds", g.getWorlds());
-    	}
-    	
-    	config.save();
+        List<Group> groups = plugin.getGroupManager().getGroups();
+        
+        for (int i = 0; i < groups.size(); i++) {
+            Group g = groups.get(i);
+            String root = "Groups." + g.getName() + ".";
+            
+            config.setProperty(root + "Default", g.getDefault());
+            config.setProperty(root + "Distance", g.getDistance());
+//            config.setProperty(root + "Players", g.getPlayers());
+//            config.setProperty(root + "Worlds", g.getWorlds());
+        }
+        
+        config.save();
     }
     
     public void savePlayer(String name) {
-    	File userConfigFile = new File(usersConfigFolder, name + ".yml");
-    	
-    	try {
+        File userConfigFile = new File(usersConfigFolder, name + ".yml");
+        
+        try {
             Configuration config = new Configuration(userConfigFile);
             
             User u = userManager.getUser(name);
             
             if (u != null) {
-            	config.setProperty("Group", userManager.getUser(name).getGroup().getName());
-            	config.setProperty("Muted", u.isMuted());
-            	config.setProperty("Spying", u.isSpying());
+                config.setProperty("Group", userManager.getUser(name).getGroup().getName());
+                config.setProperty("Muted", u.isMuted());
+                config.setProperty("Spying", u.isSpying());
             }
             
             config.save();

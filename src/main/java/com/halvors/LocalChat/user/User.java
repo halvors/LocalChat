@@ -23,63 +23,63 @@ import com.halvors.LocalChat.LocalChat;
 import com.halvors.LocalChat.group.Group;
 
 public class User {
-	private final LocalChat plugin;
-	
-	private String name;
-	private Group group;
-	private String format;
-	private boolean isMuted;
-	private boolean isSpying;
-	
-	public User(LocalChat instance) {
-		plugin = instance;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public Group getGroup() {
-		return group;
-	}
-	
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-	
-	public String getFormat() {
-		return format;
-	}
-	
-	public void setFormat(String format) {
-		this.format = format;
-	}
-	
-	public boolean isMuted() {
-		return isMuted;
-	}
-	
-	public void setMuted(boolean isMuted) {
-		this.isMuted = isMuted;
-	}
-	
-	public boolean isSpying() {
-		return isSpying;
-	}
-	
-	public void setSpying(boolean isSpying) {
-		this.isSpying = isSpying;
-	}
-	
-	public boolean inGroup() {
-		if (plugin.getGroupManager().hasGroup(group.getName())) {
-			return true;
-		}
-		
-		return false;
-	}
+    private final LocalChat plugin;
+    
+    private String name;
+    private Group group;
+    private String format;
+    private boolean isMuted;
+    private boolean isSpying;
+    
+    public User(LocalChat instance) {
+        plugin = instance;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public Group getGroup() {
+        return group;
+    }
+    
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+    
+    public String getFormat() {
+        return format;
+    }
+    
+    public void setFormat(String format) {
+        this.format = format;
+    }
+    
+    public boolean isMuted() {
+        return isMuted;
+    }
+    
+    public void setMuted(boolean isMuted) {
+        this.isMuted = isMuted;
+    }
+    
+    public boolean isSpying() {
+        return isSpying;
+    }
+    
+    public void setSpying(boolean isSpying) {
+        this.isSpying = isSpying;
+    }
+    
+    public boolean inGroup() {
+        if (plugin.getGroupManager().hasGroup(group.getName())) {
+            return true;
+        }
+        
+        return false;
+    }
 }
