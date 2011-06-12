@@ -197,7 +197,7 @@ public class ConfigManager {
                 groups.add(g);
             }
             
-            groupManager.setGroups(groups);
+//            groupManager.setGroups(groups);
         } catch (Exception e) {
         }
     }
